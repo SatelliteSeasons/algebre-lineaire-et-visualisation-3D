@@ -10,9 +10,9 @@ import java.lang.NoSuchMethodException;
 import java.lang.SecurityException;
 import java.lang.Exception;
 /**
- * Classe permettant de creer une fenetre representant un plan.<br>
- * Le plan affiche s'etend des coordonnees [-6,6] sur les axes x et y.<br>
- * Il est possible de dessiner des points, des fleches et des segments sur un plan.<br>
+ * Classe permettant de créer une fenêtre représentant un plan.<br>
+ * Le plan affiché s'étend des coordonnées [-6,6] sur les axes x et y.<br>
+ * Il est possible de dessiner des points, des flêches et des segments sur un plan.<br>
  * 
  * 
  * @author Benjamin Perret
@@ -20,9 +20,9 @@ import java.lang.Exception;
  */
 public class Plan 
 {
-    // min et max du repere monde
-    private double xMax=11;
-    private double yMax=11;
+    // min et max du repère monde
+    private double xMax=6;
+    private double yMax=6;
     
     // largeur et hauteur de la zone de dessin en pixel
     private int largeurPix=600;
@@ -43,7 +43,7 @@ public class Plan
   
     
     /**
-     * Cree un plan et l'affiche dans une fenetre
+     * Créé un plan et l'affiche dans une fenêtre
      */
     public Plan()
     {
@@ -85,9 +85,9 @@ public class Plan
    
     
     /**
-     * Conversion coordonnee en x dans le repere monde vers le repere ecran
-     * @param x coordonnee en x dans le repere monde
-     * @return coordonnee dans le repere ecran
+     * Conversion coordonnée en x dans le repère monde vers le repère écran
+     * @param x coordonnée en x dans le repère monde
+     * @return coordonnée dans le repère écran
      */
     private int repereVersEcranX(double x)
     {
@@ -95,9 +95,9 @@ public class Plan
     }
     
     /**
-     * Conversion coordonnee en y dans le repere monde vers le repere ecran
-     * @param y coordonnee en y dans le repere monde
-     * @return coordonnee dans le repere ecran
+     * Conversion coordonnée en y dans le repère monde vers le repère écran
+     * @param y coordonnée en y dans le repère monde
+     * @return coordonnée dans le repère écran
      */
     private int repereVersEcranY(double y)
     {
@@ -105,7 +105,7 @@ public class Plan
     }
     
     /**
-     * Dessine le repere du monde dans le systeme de coordonnees ecran
+     * Dessine le repère du monde dans le système de coordonnées écran
      * @param g objet graphics sur la zone de dessin
      */
     private void dessineRepere(Graphics g)
@@ -153,7 +153,7 @@ public class Plan
     
     /**
      * Dessine un point rouge
-     * @param o : tout objet possedant deux fonctions publiques getX() et getY() retournant respectivement les coordonnees en x et y de l'objet au format double
+     * @param o : tout objet possédant deux fonctions publiques getX() et getY() retournant respectivement les coordonnées en x et y de l'objet au format double
      */
     public void dessinerPointEn2d(Object o)
     {
@@ -166,9 +166,9 @@ public class Plan
     }
     
     /**
-     * Dessiner un point rouge aux coordonnees (px,py)
-     * @param px Coordonnee en x
-     * @param py Coordonnee en y
+     * Dessiner un point rouge aux coordonnées (px,py)
+     * @param px Coordonnée en x
+     * @param py Coordonnée en y
      */
     private void dessinerPointEn2d(double px, double py)
     {
@@ -176,9 +176,9 @@ public class Plan
     }
     
     /**
-     * Dessiner un point aux coordonnees (px,py)
-     * @param px Coordonnee en x
-     * @param py Coordonnee en y
+     * Dessiner un point aux coordonnées (px,py)
+     * @param px Coordonnée en x
+     * @param py Coordonnée en y
      */
     private void dessinerPointEn2d(double px, double py, Color couleur)
     {
@@ -190,9 +190,9 @@ public class Plan
     }
     
     /**
-     * Dessiner une fleche bleue partant de l'origine et allant aux coordonnees (px,py)
-     * @param px Coordonnee en x de la pointe de la fleche
-     * @param py Coordonnee en y de la pointe de la fleche
+     * Dessiner une flèche bleue partant de l'origine et allant aux coordonnées (px,py)
+     * @param px Coordonnée en x de la pointe de la flêche
+     * @param py Coordonnée en y de la pointe de la flêche
      */
     private void dessinerFlecheEn2d(double px, double py)
     {
@@ -201,7 +201,7 @@ public class Plan
     
     /**
      * Dessine un vecteur
-     * @param o : tout objet possedant deux fonctions publiques getX() et getY() retournant respectivement les coordonnees en x et y de l'objet au format double
+     * @param o : tout objet possédant deux fonctions publiques getX() et getY() retournant respectivement les coordonnées en x et y de l'objet au format double
      */
     public void dessinerVecteurEn2d(Object o)
     {
@@ -223,11 +223,11 @@ public class Plan
             
         } catch (NoSuchMethodException e) 
         {
-            System.err.println("Plan: dessinerVecteurEn2d: Impossible de trouver la methode "+method+" dans la classe " +c );
+            System.err.println("Plan: dessinerVecteurEn2d: Impossible de trouver la méthode "+method+" dans la classe " +c );
             return null;
         } catch (SecurityException e)
         {
-            System.err.println("Plan: dessinerVecteurEn2d: La methode " +method +" doit etre publique dans la classe " +c);
+            System.err.println("Plan: dessinerVecteurEn2d: La méthode " +method +" doit être publique dans la classe " +c);
             return null;
         }
         
@@ -242,13 +242,13 @@ public class Plan
          
         if(or==null)
         {
-            System.err.println("Plan: dessinerVecteurEn2d: Erreur la methode " +method+ " n'a rien retourne");
+            System.err.println("Plan: dessinerVecteurEn2d: Erreur la méthode " +method+ " n'a rien retourné");
             return null;
         }
         
         if(!(or instanceof Double))
         {
-            System.err.println("Plan: dessinerVecteurEn2d: Erreur la methode " +method+ " doit retourner un double");
+            System.err.println("Plan: dessinerVecteurEn2d: Erreur la méthode " +method+ " doit retourner un double");
             return null;
         }
         
@@ -256,10 +256,10 @@ public class Plan
     }
  
     /**
-     * Dessiner une fleche partant de l'origine et allant aux coordonnees (px,py)
-     * @param px Coordonnee en x de la pointe de la fleche
-     * @param py Coordonnee en y de la pointe de la fleche
-     * @param couleur Couleur de la fleche (voir classe java.awt.Color)
+     * Dessiner une flèche partant de l'origine et allant aux coordonnées (px,py)
+     * @param px Coordonnée en x de la pointe de la flêche
+     * @param py Coordonnée en y de la pointe de la flêche
+     * @param couleur Couleur de la flêche (voir classe java.awt.Color)
      */
     private void dessinerFlecheEn2d(double px, double py, Color couleur)
     {
@@ -267,12 +267,12 @@ public class Plan
     }
     
     /**
-     * Dessiner une fleche bleue partant de (px1,py1) et allant aux coordonnees (px2,py2)
-     * @param px1 Coordonnee en x de l'origine de la fleche
-     * @param py1 Coordonnee en y de l'origine de la fleche
-     * @param px2 Coordonnee en x de la pointe de la fleche
-     * @param py2 Coordonnee en y de la pointe de la fleche
-     * @param couleur Couleur de la fleche (voir classe java.awt.Color)
+     * Dessiner une flèche bleue partant de (px1,py1) et allant aux coordonnées (px2,py2)
+     * @param px1 Coordonnée en x de l'origine de la flêche
+     * @param py1 Coordonnée en y de l'origine de la flêche
+     * @param px2 Coordonnée en x de la pointe de la flêche
+     * @param py2 Coordonnée en y de la pointe de la flêche
+     * @param couleur Couleur de la flêche (voir classe java.awt.Color)
      */
     private void dessinerFlecheEn2d(double px1, double py1, double px2, double py2, Color couleur)
     {
@@ -291,8 +291,8 @@ public class Plan
    
     /**
      * Dessine un segment vert
-     * @param o1 : origine du segment : tout objet possedant deux fonctions publiques getX() et getY() retournant respectivement les coordonnees en x et y de l'objet au format double
-     * @param o2 : extremite du segment : tout objet possedant deux fonctions publiques getX() et getY() retournant respectivement les coordonnees en x et y de l'objet au format double
+     * @param o1 : origine du segment : tout objet possédant deux fonctions publiques getX() et getY() retournant respectivement les coordonnées en x et y de l'objet au format double
+     * @param o2 : extrémité du segment : tout objet possédant deux fonctions publiques getX() et getY() retournant respectivement les coordonnées en x et y de l'objet au format double
      */
     public void dessinerSegmentEn2d(Object o1, Object o2)
     {
@@ -308,10 +308,10 @@ public class Plan
     
     /**
      * Dessiner un segment vert allant du point  (px1,py1) au point (px2,py2)
-     * @param px1 Coordonnee en x de l'origine du segment
-     * @param py1 Coordonnee en y de l'origine du segment
-     * @param px2 Coordonnee en x de la pointe du segment
-     * @param py2 Coordonnee en y de la pointe du segment
+     * @param px1 Coordonnée en x de l'origine du segment
+     * @param py1 Coordonnée en y de l'origine du segment
+     * @param px2 Coordonnée en x de la pointe du segment
+     * @param py2 Coordonnée en y de la pointe du segment
      */
     private void dessinerSegmentEn2d(double px1, double py1, double px2, double py2)
     {
@@ -320,10 +320,10 @@ public class Plan
     
     /**
      * Dessiner un segment  allant du point  (px1,py1) au point (px2,py2)
-     * @param px1 Coordonnee en x de l'origine du segment
-     * @param py1 Coordonnee en y de l'origine du segment
-     * @param px2 Coordonnee en x de la pointe du segment
-     * @param py2 Coordonnee en y de la pointe du segment
+     * @param px1 Coordonnée en x de l'origine du segment
+     * @param py1 Coordonnée en y de l'origine du segment
+     * @param px2 Coordonnée en x de la pointe du segment
+     * @param py2 Coordonnée en y de la pointe du segment
      * @param couleur Couleur du segment (voir classe java.awt.Color)
      */
     private void dessinerSegmentEn2d(double px1, double py1, double px2, double py2, Color couleur)
@@ -337,8 +337,8 @@ public class Plan
         panel.repaint();
     }
     /**
-     * Definit si il faut afficher le repere
-     * @param f si vrai le repere est affiche, sinon il ne l'est pas.
+     * Définit si il faut afficher le repère
+     * @param f si vrai le repere est affiché, sinon il ne l'est pas.
      */
     public void afficheRepere(boolean f)
     {
