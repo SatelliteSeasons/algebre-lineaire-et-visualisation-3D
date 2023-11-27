@@ -4,7 +4,7 @@ import java.util.Arrays;
 /**
  * Vecteur
  *
- * @author Richard Ho & Theo Phan 
+ * @author Richard Ho + Théo Phan 
  * @version 06/10/2023
  */
 public class Vecteur
@@ -18,7 +18,7 @@ public class Vecteur
     
     public Vecteur( final Vecteur pVecteur ){
         Arrays.copyOf(pVecteur.aN, pVecteur.aN.length);
-        //Si avec getter, necessite boucle
+        //Si avec getter, nécessite boucle
     }
     
     public int getDimension(){
@@ -56,14 +56,14 @@ public class Vecteur
     }
     
     /*
-     * Procedure ne marchant pas lorsque la norme du vecteur est egal a 0
+     * Procédure ne marchant pas lorsque la norme du vecteur est égal à 0
      */
     public void normaliser(){
         this.multiplicationScalaire( (1.0/this.norme()) );
     }
     
     /*
-     * Necessite un autre vecteur de meme dimension que l'instance.
+     * Nécessite un autre vecteur de même dimension que l'instance.
      */
     public void sommeVectorielle( final Vecteur pVect ){
         if( this.getDimension() == pVect.getDimension() ){
@@ -71,7 +71,7 @@ public class Vecteur
                 this.aN[i] += pVect.getCoordonnee(i);
             }
         }else{
-            System.out.print("Dimensions differentes entre les deux vecteurs.");
+            System.out.print("Dimensions différentes entre les deux vecteurs.");
         }
     }
     
@@ -82,7 +82,7 @@ public class Vecteur
                 vLocal += this.aN[i]*pVect.getCoordonnee(i);
             }
         }else{
-            System.out.print("Dimensions differentes entre les deux vecteurs.");
+            System.out.print("Dimensions différentes entre les deux vecteurs.");
         }
         return vLocal;
     }
@@ -121,7 +121,7 @@ public class Vecteur
             }
             return true;
         }else{
-            System.out.print("Pas meme dimension");
+            System.out.print("Pas même dimension");
             return false;
         }
     }
@@ -138,28 +138,28 @@ public class Vecteur
     
     /*
          2.1  En utilisant uniquement les types de donnes
-         vus dans cette atelier jusqua present, est-il possible de declarer les attributs correspondant a un vecteur en dimension arbitraire ?
-         - Oui il est possible de prendre en parametre n dimension, puis d'initialiser un tableau de n dimension sur Java dans le constructeur.
+         vus dans cette atelier jusqu’a present, est-il possible de declarer les attributs correspondant a un vecteur en dimension arbitraire ?
+         - Oui il est possible de prendre en paramètre n dimension, puis d'initialiser un tableau de n dimension sur Java dans le constructeur.
      */
     
     /*
      *  2.8 Lorsuqu'on invoque getCoordonne(4), on obtient un message d'erreur de type "ArrayIndexOutOfBoundsException".
-     *  Ce qui est normal, le deuxieme vecteur est un tableau de 4 elements donc les indices sont de 0 a 3, notre methode affiche
-     *  ainsi, l'indice du tableau et non la "4e" valeur. Meme explication pour le premier vecteur.
+     *  Ce qui est normal, le deuxième vecteur est un tableau de 4 éléments donc les indices sont de 0 à 3, notre méthode affiche
+     *  ainsi, l'indice du tableau et non la "4e" valeur. Même explication pour le premier vecteur.
      */
     
     /*
      *  3.2 Il est normal de constater que le vecteur (0 ; 1.5 ; 0) est confondu avec le vecteur (0; 1.5; 2) car nous avons un plan en 2D,
-     *  ce qui signifie que ce plan ne peux afficher que les deux premieres coordonnees d'un vecteur. Et ici, on observe que les deux coordonnees des deux vecteur
+     *  ce qui signifie que ce plan ne peux afficher que les deux premières coordonnées d'un vecteur. Et ici, on observe que les deux coordonnées des deux vecteur
      *  sont identiques.
      */
     
     /*
-     *  7.2 Lorsque qu'on fait une somme entre deux vecteur de dimension different, nous avons la decision d'afficher
+     *  7.2 Lorsque qu'on fait une somme entre deux vecteur de dimension différent, nous avons la décision d'afficher
      *  un message d'erreur.
      */
     
     /*
-     * Meme raisonnement que question precedente.
+     * Même raisonnement que question précédente.
      */
 }

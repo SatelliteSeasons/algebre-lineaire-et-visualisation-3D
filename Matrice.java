@@ -114,6 +114,38 @@ public class Matrice
         this.setCoefficient( 2, 2, Math.cos(pAlpha) );
     }
     
+    public void setRotation3dOy( final double pAlpha ){ //autour de l'axe des x
+        this.setIdentite();
+        this.setCoefficient( 0, 0, Math.cos(pAlpha) );
+        this.setCoefficient( 2, 0, -Math.sin(pAlpha) );
+        this.setCoefficient( 0, 2, Math.sin(pAlpha) );
+        this.setCoefficient( 2, 2, Math.cos(pAlpha) );
+    }
+    
+    public void setRotation3dOz( final double pAlpha ){ //autour de l'axe des x
+        this.setIdentite();
+        this.setCoefficient( 0, 0, Math.cos(pAlpha) );
+        this.setCoefficient( 0, 1, -Math.sin(pAlpha) );
+        this.setCoefficient( 1, 0, Math.sin(pAlpha) );
+        this.setCoefficient( 1, 1, Math.cos(pAlpha) );
+    }
+    
+    public void setRotation3dOxOyOz(final double alpha1, final double alpha2, final double alpha3){
+        this.setIdentite();
+        this.setCoefficient( 1, 1, Math.cos(alpha1) );
+        this.setCoefficient( 1, 2, -Math.sin(alpha1) );
+        this.setCoefficient( 2, 1, Math.sin(alpha1) );
+        this.setCoefficient( 2, 2, Math.cos(alpha1) );
+        this.setCoefficient( 0, 0, Math.cos(alpha2) );
+        this.setCoefficient( 2, 0, -Math.sin(alpha2) );
+        this.setCoefficient( 0, 2, Math.sin(alpha2) );
+        this.setCoefficient( 2, 2, Math.cos(alpha2) );
+        this.setCoefficient( 0, 0, Math.cos(alpha3) );
+        this.setCoefficient( 0, 1, -Math.sin(alpha3) );
+        this.setCoefficient( 1, 0, Math.sin(alpha3) );
+        this.setCoefficient( 1, 1, Math.cos(alpha3) );
+    }
+    
     public static void tracerDroite( final Vecteur pU ){
         Plan vPlan = new Plan();
         Vecteur vVect = new Vecteur(2);
@@ -170,5 +202,61 @@ public class Matrice
      * 2.8 Lorsqu'on invoque getCoefficient(3,4) sur les deux matrices, on a une erreur du type java.lang.ArrayIndexOutOfBoundsException,
      * ce qui est normal car les paramètres sont les indices de la matrice et les matrices vont de l'indice 0 jusqu'à m exclus et n exclus
      */
+    
+    /*
+     * oui
+     */
+    public Vecteur getVecteurColonne(final int pIndice){
+        int vDimension = this.getNbLignes();
+        Vecteur vVecteur = new Vecteur(vDimension);
+        for(int i=0; i< vDimension; i++){
+            vVecteur.setCoordonnee(i, this.getCoefficient(i,pIndice));
+        }
+        return vVecteur;
+    }
+    
+    /*
+    public Matrice produitMatriciel(final Matrice pMat){
+        int vNbColonneA = this.getNbColonnes();
+        int vNbLigneP = pMat.getNbLignes();
+        if(vNbColonneA == vNbLigneP){
+            Matrice vMatrice = new Matrice( vNbLigneP, vNbColonneA);
+            for(int i=0; i < vNbLigneP; i++){
+                Vecteur vVectP = new Vecteur(pMat.getVecteurLigne(i) );
+                for(int j=0; j < vNbColonneA; j++){
+                    Vecteur vVectA = new Vecteur( this.getVecteurColonne(j) );
+                    vMatrice.setCoefficient(i, j, vVectP.produitScalaire(vVectA) );
+                }
+            }
+            return vMatrice;
+        }else{
+            return null;
+        }
+        
+    }
+    */
+   
+    public Matrice produitMatriciel(final Matrice pMat){
+        int vNbColonneA = this.getNbColonnes();
+        int vNbLigneP = pMat.getNbLignes();
+        if(vNbColonneA == vNbLigneP){
+            int vNbLigneA = this.getNbLignes();
+            int vNbColonneP = pMat.getNbColonnes();
+            Matrice vMatrice = new Matrice( vNbLigneA, vNbColonneP );
+            for(int i=0; i<vNbLigneA  ;i++){
+                Vecteur vVectA = this.getVecteurLigne(i);
+                for(int j=0; j<vNbColonneP;j++){
+                    Vecteur vVectP = pMat.getVecteurColonne(j);
+                    vMatrice.setCoefficient(i , j, vVectA.produitScalaire(vVectP) );
+                }
+            }
+            return vMatrice;
+        }else{
+            return null;
+        }
+        
+    }
+    
+    
     
 }
