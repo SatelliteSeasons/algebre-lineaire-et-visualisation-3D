@@ -113,19 +113,36 @@ public class TestCube
         
         //Matrice vMat = new Matrice( 3, 3 );
         // Rotation Ox
-        //vMat.setRotation3dOz( Math.PI/4 );
+        //vMat.setRotation3dOz( Math.PI/4 ); <- Q3.4
         
         //Homotétie
-        //vMat.setHomothetie(4);
+        //vMat.setHomothetie(4); <- Q3.5
         
-        //rotation autour des 3 axes
-        Matrice vMat = getRotation( Math.PI/4, Math.PI/4, Math.PI/4 );
+        //rotation autour des 3 axes <- Q3.7
+        /*Matrice vMat = getRotation( Math.PI/4, Math.PI/4, Math.PI/4 );
         appliquer( cube, vMat );
         vMat.setHomothetie(3);
         appliquer( cube, vMat );
         
         // On affiche le cube
-        dessinerCube(p,cube);
+        dessinerCube( p,cube );
+        */
+        
+        //Q.3.8
+        for (int i=0; i<=3140/4; i++) //PI~3.14 => PI*100~314 et 
+        //est le déplacement élémentaire est de 0.001 radian
+        {
+            //Pour les rotations
+            Matrice vMat = getRotation( 0.001, 0.001, 0.001 );
+            appliquer( cube, vMat );
+            dessinerCube( p,cube );
+            
+            //Pour l'homothétie
+            vMat.setHomothetie(1.001);
+            appliquer( cube, vMat );
+            dessinerCube( p,cube );
+        }
+        
         
     }
     
@@ -139,7 +156,7 @@ public class TestCube
      */
     
     /*
-     * 
+     * Q3.6
      */
     public static Matrice getRotation( final double alpha1, final double alpha2, final double alpha3 ){
         Matrice vMat1 = new Matrice(3,3);
@@ -148,7 +165,7 @@ public class TestCube
         vMat1.setRotation3dOx(alpha1);
         vMat2.setRotation3dOy(alpha2);
         vMat3.setRotation3dOz(alpha3);
-        Matrice vMatProd = (vMat1.produitMatriciel( vMat2 ) ).produitMatriciel( vMat3);
+        Matrice vMatProd = ( vMat1.produitMatriciel( vMat2 ) ).produitMatriciel( vMat3 );
         return vMatProd;
     }
 }

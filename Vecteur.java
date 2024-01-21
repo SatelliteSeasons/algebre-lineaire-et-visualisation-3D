@@ -162,4 +162,10 @@ public class Vecteur
     /*
      * Même raisonnement que question précédente.
      */
+    /*
+     * 
+     */
+    public void normaliseHomogene() {
+        this.multiplicationScalaire( ( 1.0/getCoordonnee( getDimension()-1 ) ) );
+    }
 }

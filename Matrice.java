@@ -130,22 +130,6 @@ public class Matrice
         this.setCoefficient( 1, 1, Math.cos(pAlpha) );
     }
     
-    public void setRotation3dOxOyOz(final double alpha1, final double alpha2, final double alpha3){
-        this.setIdentite();
-        this.setCoefficient( 1, 1, Math.cos(alpha1) );
-        this.setCoefficient( 1, 2, -Math.sin(alpha1) );
-        this.setCoefficient( 2, 1, Math.sin(alpha1) );
-        this.setCoefficient( 2, 2, Math.cos(alpha1) );
-        this.setCoefficient( 0, 0, Math.cos(alpha2) );
-        this.setCoefficient( 2, 0, -Math.sin(alpha2) );
-        this.setCoefficient( 0, 2, Math.sin(alpha2) );
-        this.setCoefficient( 2, 2, Math.cos(alpha2) );
-        this.setCoefficient( 0, 0, Math.cos(alpha3) );
-        this.setCoefficient( 0, 1, -Math.sin(alpha3) );
-        this.setCoefficient( 1, 0, Math.sin(alpha3) );
-        this.setCoefficient( 1, 1, Math.cos(alpha3) );
-    }
-    
     public static void tracerDroite( final Vecteur pU ){
         Plan vPlan = new Plan();
         Vecteur vVect = new Vecteur(2);
@@ -258,5 +242,112 @@ public class Matrice
     }
     
     
+    public void setHomothetieHomogene3d( final double pK ) {
+        this.setHomothetie(pK);
+        this.setCoefficient( 3, 3, 1 );
+    }
     
+    public void setTranslationHomogene3d( final Vecteur pT ) {
+        this.setIdentite();
+        this.setCoefficient( 0, 3, pT.getCoordonnee( 0 ) );
+        this.setCoefficient( 1, 3, pT.getCoordonnee( 1 ) );
+        this.setCoefficient( 2, 3, pT.getCoordonnee( 2 ) );
+    }
+    
+    public void setRotationOxHomogene3d( final double pAlpha ) {
+        this.setIdentite();
+        this.setCoefficient( 1, 1, Math.cos( pAlpha ) );
+        this.setCoefficient( 1, 2, -Math.sin( pAlpha ) );
+        this.setCoefficient( 2, 1, Math.sin( pAlpha ) );
+        this.setCoefficient( 2, 2, Math.cos( pAlpha ) );
+    }
+    
+    public void setRotationOyHomogene3d( final double pAlpha ) {
+        this.setIdentite();
+        this.setCoefficient( 0, 0, Math.cos( pAlpha ) );
+        this.setCoefficient( 2, 0, -Math.sin( pAlpha ) );
+        this.setCoefficient( 0, 2, Math.sin( pAlpha ) );
+        this.setCoefficient( 2, 2, Math.cos( pAlpha ) );
+    }
+    
+    public void setRotationOzHomogene3d( final double pAlpha ) {
+        this.setIdentite();
+        this.setCoefficient( 0, 0, Math.cos( pAlpha ) );
+        this.setCoefficient( 0, 1, -Math.sin( pAlpha ) );
+        this.setCoefficient( 1, 0, Math.sin( pAlpha ) );
+        this.setCoefficient( 1, 1, Math.cos( pAlpha ) );
+    }
+    
+    public static Matrice getRotationHomogene3d( final double pAlphaX, final double pAlphaY, final double pAlphaZ ){
+        Matrice vMat1 = new Matrice(4,4);
+        Matrice vMat2 = new Matrice(4,4);
+        Matrice vMat3 = new Matrice(4,4);
+        vMat1.setRotationOxHomogene3d( pAlphaX );
+        vMat2.setRotationOyHomogene3d( pAlphaY );
+        vMat3.setRotationOzHomogene3d( pAlphaZ );
+        Matrice vMatProd = ( vMat1.produitMatriciel( vMat2 ) ).produitMatriciel( vMat3 );
+        return vMatProd;
+    }
+    
+    /*
+     * On l'applique sur une matrice 3x4
+     */
+    public void setProjectionOrthoOxyHomogene3d() {
+        for (int i=0; i<3; i++){
+            for (int j=0; j<4; j++){
+                if ( (i==0 && j==0) || (i==1 && j==1) || (i==2 && j==3) ){
+                    this.setCoefficient( i, j, 1.0 );
+                }
+                else{
+                    this.setCoefficient( i, j, 0.0 );
+                }
+            }
+        }
+    }
+    
+    /*
+     * On l'applique sur une matrice 3x4
+     */
+    public void setProjectionOrthoOxzHomogene3d() {
+        for (int i=0; i<3; i++){
+            for (int j=0; j<4; j++){
+                if ( (i==0 && j==0) || (i==1 && j==2) || (i==2 && j==3) ){
+                    this.setCoefficient( i, j, 1.0 );
+                }
+                else{
+                    this.setCoefficient( i, j, 0.0 );
+                }
+            }
+        }
+    }
+    
+    /*
+     * On l'applique sur une matrice 3x4
+     */
+    public void setProjectionOrthoOyzHomogene3d() {
+        for (int i=0; i<3; i++){
+            for (int j=0; j<4; j++){
+                if ( (i==0 && j==1) || (i==1 && j==2) || (i==2 && j==3) ){
+                    this.setCoefficient( i, j, 1.0 );
+                }
+                else{
+                    this.setCoefficient( i, j, 0.0 );
+                }
+            }
+        }
+    }
+    
+    /*
+     * On l'applique sur une matrice 3x4
+     */
+    public void setProjectionPerspectiveOxyHomogene3d( final double pD ) {
+        for (int i=0; i<3; i++){
+            for (int j=0; j<4; j++){
+                this.setCoefficient( i, j, 0.0 );
+            }
+        }
+        this.setCoefficient( 0, 0, 1.0 );
+        this.setCoefficient( 1, 1, 1.0 );
+        this.setCoefficient( 2, 2, 1.0/pD );
+    }
 }
