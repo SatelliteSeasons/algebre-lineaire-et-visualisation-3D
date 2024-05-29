@@ -2,8 +2,8 @@
 /**
  * Write a description of class TestA here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Richard Ho & Théo Phan
+ * @version 0.1
  */
 public class TestCube
 {

@@ -1,7 +1,7 @@
 /**
  * Fonction de test 
  * 
- * @author Votre_Nom
+ * @author Richard Ho & Théo Phan
  * @version 0.1
  */
 public class TestCAO
